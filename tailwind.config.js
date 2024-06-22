@@ -8,6 +8,7 @@ export default {
     colors: {
       grey: "#8997A3",
       red: "#C7181C",
+      error: "#FF6060",
       white: "#fff",
     },
   },

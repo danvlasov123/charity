@@ -9,6 +9,8 @@ const Button = ({
   variant = variants.primary,
   children,
   className,
+  loading,
+  disabled,
   ...rest
 }) => {
   const btnClassName = cn(
@@ -16,6 +18,9 @@ const Button = ({
     "h-14 rounded-2xl px-6 tracking-tight w-full",
     {
       "bg-red text-white uppercase": variant === variants.primary,
+    },
+    {
+      "bg-grey pointer-events-none": loading || disabled,
     },
   );
   return (

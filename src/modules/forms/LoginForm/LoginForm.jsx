@@ -1,7 +1,9 @@
 import React from "react";
 import { Input } from "src/components/ui";
 
-const LoginForm = () => {
+const LoginForm = ({ formik }) => {
+  const { handleChange, values, errors, handleBlur, touched } = formik;
+
   return (
     <form>
       <p className="text-sm">Авторизоваться</p>
@@ -10,11 +12,23 @@ const LoginForm = () => {
           className="mt-2.5"
           type="email"
           placeholder="Электронная почта"
-          required
+          name="email"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.email}
+          error={touched.email && errors.email}
         />
       </div>
       <div className="pt-7">
-        <Input type="password" placeholder="Пароль" required />
+        <Input
+          name="password"
+          type="password"
+          placeholder="Пароль"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.password}
+          error={touched.password && errors.password}
+        />
       </div>
     </form>
   );
