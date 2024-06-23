@@ -34,12 +34,7 @@ const Login = () => {
     <div className="flex h-full flex-col justify-between pb-24 pt-20">
       <div>
         <LoginForm formik={formik} />
-        <div className="px-6 pt-2.5">
-          <p className="text-center text-xs">
-            Посетите справочный центр , чтобы получить дополнительную помощь,
-            если вы не можете войти в учетную запись
-          </p>
-        </div>
+
         <div className="flex justify-center gap-10 pt-8 text-sm">
           <Link to={PAGES_PATH.reset.full}>Забыли пароль?</Link>
           <Link to={PAGES_PATH.register.full}>Регистрация</Link>
