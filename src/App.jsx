@@ -2,11 +2,14 @@ import { RouterProvider } from "react-router-dom";
 
 import { router } from "./router";
 
+import { store } from "src/store/";
+import { Provider } from "react-redux";
+
 const App = () => {
   return (
-    <div className="h-[100dvh] overflow-hidden">
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </div>
+    </Provider>
   );
 };
 

@@ -1,8 +1,10 @@
 import { Button, Input } from "src/components/ui";
 
-const ResetEmail = () => {
+import { constants } from "../../Reset";
+
+const ResetEmail = ({ onSubmit }) => {
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <h1 className="uppercase">Восстановить доступ</h1>
         <p className="pt-8 text-xs">
@@ -14,7 +16,12 @@ const ResetEmail = () => {
         </div>
       </div>
       <div>
-        <Button>Отправить код</Button>
+        <Button
+          className="uppercase"
+          onClick={() => onSubmit(constants.steps.code)}
+        >
+          Отправить код
+        </Button>
       </div>
     </div>
   );

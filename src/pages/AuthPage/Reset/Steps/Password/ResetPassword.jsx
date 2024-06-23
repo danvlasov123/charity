@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { PAGES_PATH } from "src/router";
 
-const ResetPassword = () => {
+const ResetPassword = ({ onSubmit }) => {
   return (
     <div className="flex h-full flex-col justify-between">
       <div>
@@ -23,7 +23,9 @@ const ResetPassword = () => {
         </Link>
       </div>
       <div>
-        <Button>Авторизуйтесь</Button>
+        <Button className="uppercase" onClick={onSubmit}>
+          Авторизуйтесь
+        </Button>
       </div>
     </div>
   );

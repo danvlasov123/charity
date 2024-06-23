@@ -1,7 +1,12 @@
-import React from "react";
+import { Content, Head } from "./components";
 
 const Main = () => {
-  return <div>Main</div>;
+  return (
+    <div className="px-6">
+      <Head />
+      <Content />
+    </div>
+  );
 };
 
 export default Main;

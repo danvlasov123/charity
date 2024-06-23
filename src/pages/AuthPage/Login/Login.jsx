@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "src/components/ui";
 import { LoginForm } from "src/modules/forms";
 
@@ -9,9 +9,12 @@ import { useFormik } from "formik";
 import { LoginSchema } from "src/utils/validation-schemas";
 
 import { fetchLogin } from "src/api/auth/auth";
+import { useDispatch } from "react-redux";
+
+import { userActions } from "src/store/slices";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -20,13 +23,13 @@ const Login = () => {
       const data = await fetchLogin(values);
 
       if (data.success) {
-        return navigate(PAGES_PATH.main.full);
+        return dispatch(userActions.setAuthorization(true));
       }
 
       setFieldError("message", "message");
     },
   });
-  
+
   return (
     <div className="flex h-full flex-col justify-between pb-24 pt-20">
       <div>
@@ -43,7 +46,11 @@ const Login = () => {
         </div>
       </div>
       <div>
-        <Button onClick={formik.submitForm} loading={formik.isSubmitting}>
+        <Button
+          onClick={formik.submitForm}
+          loading={formik.isSubmitting}
+          className="uppercase"
+        >
           Авторизуйтесь
         </Button>
       </div>

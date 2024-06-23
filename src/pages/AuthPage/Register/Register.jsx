@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "src/components/ui";
 import { RegisterForm } from "src/modules/forms";
 import { PAGES_PATH } from "src/router";
@@ -9,13 +9,17 @@ import { RegisterSchema } from "src/utils/validation-schemas";
 
 import { fetchRegister } from "src/api/auth/auth";
 
+import { useDispatch } from "react-redux";
+
+import { userActions } from "src/store/slices";
+
 const Register = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (values) => {
     const data = await fetchRegister(values);
 
     if (data.success) {
-      navigate(PAGES_PATH.main.full);
+      return dispatch(userActions.setAuthorization(true));
     }
   };
 
@@ -50,7 +54,11 @@ const Register = () => {
         </div>
       </div>
       <div>
-        <Button onClick={formik.submitForm} loading={formik.isSubmitting}>
+        <Button
+          onClick={formik.submitForm}
+          loading={formik.isSubmitting}
+          className="uppercase"
+        >
           ЗАРЕГИСТРИРОВАТЬСЯ
         </Button>
       </div>

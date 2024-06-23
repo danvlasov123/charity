@@ -3,7 +3,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Auth, Login, Register, Reset } from "./pages/AuthPage";
 import { Main } from "./pages/Main";
 
-import { PrivateLayout } from "./layouts";
+import { PrivateLayout } from "./layouts/layout";
+
+import { Donate, Confirm } from "./pages/Donate";
 
 export const PAGES_PATH = {
   main: {
@@ -31,6 +33,16 @@ export const PAGES_PATH = {
     base: "reset",
     full: "/auth/reset",
   },
+  donate: {
+    parent: "/",
+    base: "donate/:id",
+    full: (id) => `/donate/${id}`,
+  },
+  confirm: {
+    parent: "/",
+    base: "donate/:id/confirm",
+    full: (id) => `/donate/${id}/confirm`,
+  },
 };
 
 export const router = createBrowserRouter([
@@ -41,6 +53,20 @@ export const router = createBrowserRouter([
       {
         path: PAGES_PATH.main.base,
         element: <Main />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <PrivateLayout isShowMenu={false} />,
+    children: [
+      {
+        path: PAGES_PATH.donate.base,
+        element: <Donate />,
+      },
+      {
+        path: PAGES_PATH.confirm.base,
+        element: <Confirm />,
       },
     ],
   },

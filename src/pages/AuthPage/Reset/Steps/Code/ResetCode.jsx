@@ -1,6 +1,8 @@
 import { Button, Input } from "src/components/ui";
 
-const ResetCode = () => {
+import { constants } from "src/pages/AuthPage/Reset/Reset";
+
+const ResetCode = ({ onSubmit }) => {
   return (
     <div className="flex h-full flex-col justify-between">
       <div>
@@ -12,11 +14,18 @@ const ResetCode = () => {
         </p>
         <div className="pt-5">
           <Input placeholder="Код" />
-          <button className="ml-auto pt-2.5 text-sm block">Не пришел код</button>
+          <button className="ml-auto block pt-2.5 text-sm">
+            Не пришел код
+          </button>
         </div>
       </div>
       <div>
-        <Button>Подтвердить</Button>
+        <Button
+          className="uppercase"
+          onClick={() => onSubmit(constants.steps.code)}
+        >
+          Подтвердить
+        </Button>
       </div>
     </div>
   );

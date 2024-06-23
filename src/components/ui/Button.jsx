@@ -1,12 +1,9 @@
 import cn from "classnames";
 
-const variants = {
-  primary: "primary",
-  secondary: "secondary",
-};
+import { constants } from ".";
 
 const Button = ({
-  variant = variants.primary,
+  variant = constants.variants.primary,
   children,
   className,
   loading,
@@ -14,14 +11,15 @@ const Button = ({
   ...rest
 }) => {
   const btnClassName = cn(
-    className,
     "h-14 rounded-2xl px-6 tracking-tight w-full",
     {
-      "bg-red text-white uppercase": variant === variants.primary,
+      "bg-red text-white": variant === constants.variants.primary,
+      "bg-white text-grey": variant === constants.variants.secondary,
     },
     {
       "bg-grey pointer-events-none": loading || disabled,
     },
+    className,
   );
   return (
     <button {...rest} className={btnClassName}>
@@ -30,4 +28,4 @@ const Button = ({
   );
 };
 
-export { Button, variants };
+export { Button };

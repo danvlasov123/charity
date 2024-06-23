@@ -4,7 +4,7 @@ export const fetchRegister = async (data) => {
   try {
     const response = await axiosInstance.post("/auth/register", data);
 
-    return response.data;
+    return { success: true, data: response.data };
   } catch (error) {
     console.log(error);
     return { success: false };
@@ -14,8 +14,8 @@ export const fetchRegister = async (data) => {
 export const fetchLogin = async (data) => {
   try {
     const response = await axiosInstance.post("/auth/login", data);
-
-    return response.data;
+    
+    return { success: true, data: response.data };
   } catch (error) {
     console.log(error);
     return { success: false };

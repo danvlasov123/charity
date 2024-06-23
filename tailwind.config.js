@@ -10,6 +10,8 @@ export default {
       red: "#C7181C",
       error: "#FF6060",
       white: "#fff",
+      black: "#000",
+      "bg-grey": "#DFDFDF80",
     },
   },
   plugins: [],
