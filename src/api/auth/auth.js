@@ -2,22 +2,28 @@ import { axiosInstance } from "../config";
 
 export const fetchRegister = async (data) => {
   try {
-    const response = await axiosInstance.post("/auth/register", data);
+    const { data: responseData } = await axiosInstance.post(
+      "/auth/register",
+      data,
+    );
 
-    return { success: true, data: response.data };
+    return { success: true, ...responseData };
   } catch (error) {
     console.log(error);
-    return { success: false };
+    return { success: false, error: error?.message || "Registration Error" };
   }
 };
 
 export const fetchLogin = async (data) => {
   try {
-    const response = await axiosInstance.post("/auth/login", data);
-    
-    return { success: true, data: response.data };
+    const { data: responseData } = await axiosInstance.post(
+      "/auth/login",
+      data,
+    );
+
+    return { success: true, ...responseData };
   } catch (error) {
     console.log(error);
-    return { success: false };
+    return { success: false, error: error?.message || "Authorisation Error" };
   }
 };

@@ -12,6 +12,8 @@ export default {
       white: "#fff",
       black: "#000",
       "bg-grey": "#DFDFDF80",
+      "light-grey": "#BEBEBE",
+      blue: "#109AC9",
     },
   },
   plugins: [],

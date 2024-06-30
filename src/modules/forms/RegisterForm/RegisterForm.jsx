@@ -1,7 +1,4 @@
-import { useFormik } from "formik";
 import { Input } from "src/components/ui";
-
-import { RegisterSchema } from "src/utils/validation-schemas";
 
 const RegisterForm = ({ formik }) => {
   const { handleChange, values, errors, handleBlur, touched } = formik;

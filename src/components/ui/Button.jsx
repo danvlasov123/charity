@@ -15,6 +15,7 @@ const Button = ({
     {
       "bg-red text-white": variant === constants.variants.primary,
       "bg-white text-grey": variant === constants.variants.secondary,
+      "px-4 active:bg-light-grey": variant === constants.variants.outline,
     },
     {
       "bg-grey pointer-events-none": loading || disabled,

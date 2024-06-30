@@ -9,14 +9,16 @@ const Input = ({
 }) => {
   const className = cn(
     "w-full focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
-    props.className,
     {
       "rounded-md border border-grey px-4 h-12":
         variant === constants.variants.primary,
       "bg-grey rounded-lg text-black h-10 px-4 placeholder:text-black":
         variant === constants.variants.secondary,
+      "border-b border-light-grey leading-4 px-6 py-2.5":
+        variant === constants.variants.outline,
       "border-error": !!error,
     },
+    props.className,
   );
 
   return (

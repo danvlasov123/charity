@@ -5,5 +5,6 @@ export const constants = {
   variants: {
     primary: "primary",
     secondary: "secondary",
+    outline: "outline",
   },
 };

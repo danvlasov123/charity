@@ -8,7 +8,7 @@ const Menu = () => {
         <Link to={PAGES_PATH.main.full}>
           <img src="/icons/home.svg" alt="home" width={34} height={34} />
         </Link>
-        <Link to={"/"}>
+        <Link to={PAGES_PATH.settings.full}>
           <img src="/icons/profile.svg" alt="profile" width={30} height={30} />
         </Link>
       </div>

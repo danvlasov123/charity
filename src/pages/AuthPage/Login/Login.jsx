@@ -22,17 +22,25 @@ const Login = () => {
     onSubmit: async (values, { setFieldError }) => {
       const data = await fetchLogin(values);
 
-      if (data.success) {
+      const { success, ...tokens } = data;
+
+      if (success) {
+        dispatch(userActions.setTokens(tokens));
         return dispatch(userActions.setAuthorization(true));
       }
 
-      setFieldError("message", "message");
+      setFieldError("message", data.error);
     },
   });
 
   return (
     <div className="flex h-full flex-col justify-between pb-24 pt-20">
-      <div>
+      <div className="relative">
+        {formik.errors.message && (
+          <span className="absolute -top-6 left-0 pb-2 text-red">
+            {formik.errors.message}
+          </span>
+        )}
         <LoginForm formik={formik} />
 
         <div className="flex justify-center gap-10 pt-8 text-sm">

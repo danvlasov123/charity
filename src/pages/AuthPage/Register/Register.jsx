@@ -15,23 +15,30 @@ import { userActions } from "src/store/slices";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const handleSubmit = async (values) => {
-    const data = await fetchRegister(values);
-
-    if (data.success) {
-      return dispatch(userActions.setAuthorization(true));
-    }
-  };
 
   const formik = useFormik({
     initialValues: { name: "", email: "", password: "" },
     validationSchema: RegisterSchema,
-    onSubmit: handleSubmit,
+    onSubmit: async (values, { setFieldError }) => {
+      const data = await fetchRegister(values);
+
+      if (data.success) {
+        dispatch(userActions.setAccessToken(data.access_token));
+        return dispatch(userActions.setAuthorization(true));
+      }
+
+      setFieldError("message", data.error);
+    },
   });
 
   return (
     <div className="flex h-full flex-col justify-between pb-24 pt-20">
-      <div>
+      <div className="relative">
+        {formik.errors.message && (
+          <span className="absolute -top-6 left-0 pb-2 text-red">
+            {formik.errors.message}
+          </span>
+        )}
         <RegisterForm formik={formik} />
         <div className="px-6 pt-2.5">
           <p className="text-center text-xs">

@@ -6,6 +6,12 @@ import { Main } from "./pages/Main";
 import { PrivateLayout } from "./layouts/layout";
 
 import { Donate, Confirm } from "./pages/Donate";
+import {
+  Settings,
+  SettingsUser,
+  SettingsPassword,
+  SettingsLanguage,
+} from "./pages/Settings";
 
 export const PAGES_PATH = {
   main: {
@@ -43,6 +49,26 @@ export const PAGES_PATH = {
     base: "donate/:id/confirm",
     full: (id) => `/donate/${id}/confirm`,
   },
+  settings: {
+    parent: "/",
+    base: "settings",
+    full: "/settings",
+  },
+  password: {
+    parent: "/settings",
+    base: "settings/password",
+    full: "/settings/password",
+  },
+  user: {
+    parent: "/settings",
+    base: "settings/user",
+    full: "/settings/user",
+  },
+  language: {
+    parent: "/settings",
+    base: "settings/language",
+    full: "/settings/language",
+  },
 };
 
 export const router = createBrowserRouter([
@@ -53,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: PAGES_PATH.main.base,
         element: <Main />,
+      },
+      {
+        path: PAGES_PATH.settings.base,
+        element: <Settings />,
       },
     ],
   },
@@ -67,6 +97,18 @@ export const router = createBrowserRouter([
       {
         path: PAGES_PATH.confirm.base,
         element: <Confirm />,
+      },
+      {
+        path: PAGES_PATH.password.base,
+        element: <SettingsPassword />,
+      },
+      {
+        path: PAGES_PATH.user.base,
+        element: <SettingsUser />,
+      },
+      {
+        path: PAGES_PATH.language.base,
+        element: <SettingsLanguage />,
       },
     ],
   },
