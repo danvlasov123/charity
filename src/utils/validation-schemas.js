@@ -7,6 +7,7 @@ export const RegisterSchema = Yup.object().shape({
     .required("Поле Электронная почта обязательно для заполнения"),
   password: Yup.string().required("Поле Пароль обязательно для заполнения"),
   message: Yup.string(),
+  agree: Yup.bool().oneOf([true]).required(),
 });
 
 export const LoginSchema = Yup.object().shape({
@@ -30,6 +31,12 @@ export const UpdatePasswordSchema = Yup.object().shape({
 });
 
 export const UpdateUserSchema = Yup.object().shape({
-  "user-name": Yup.string().required("Поле обязательно для заполнение"),
-  "display-name": Yup.string().required("Поле обязательно для заполнение"),
+  firstName: Yup.string().required("Поле обязательно для заполнение"),
+  lastName: Yup.string().required("Поле обязательно для заполнение"),
+});
+
+export const DonateAmountSchema = Yup.object().shape({
+  amount: Yup.number()
+    .min(5, "Наш минимальный взнос составляет 5.00$")
+    .required("Наш минимальный взнос составляет 5.00$"),
 });

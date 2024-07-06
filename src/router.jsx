@@ -2,10 +2,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { Auth, Login, Register, Reset } from "./pages/AuthPage";
 import { Main } from "./pages/Main";
+import { History } from "./pages/History";
+import { Donate, Confirm } from "./pages/Donate";
 
 import { PrivateLayout } from "./layouts/layout";
 
-import { Donate, Confirm } from "./pages/Donate";
 import {
   Settings,
   SettingsUser,
@@ -18,6 +19,11 @@ export const PAGES_PATH = {
     base: "",
     parent: "/",
     full: "/",
+  },
+  history: {
+    parent: "/",
+    base: "history",
+    full: "/history",
   },
   auth: {
     base: "auth",
@@ -46,8 +52,8 @@ export const PAGES_PATH = {
   },
   confirm: {
     parent: "/",
-    base: "donate/:id/confirm",
-    full: (id) => `/donate/${id}/confirm`,
+    base: "donate/:id/:amount/confirm",
+    full: (id, amount) => `/donate/${id}/${amount}/confirm/`,
   },
   settings: {
     parent: "/",
@@ -83,6 +89,10 @@ export const router = createBrowserRouter([
       {
         path: PAGES_PATH.settings.base,
         element: <Settings />,
+      },
+      {
+        path: PAGES_PATH.history.base,
+        element: <History />,
       },
     ],
   },

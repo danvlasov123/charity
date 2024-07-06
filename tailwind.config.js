@@ -13,8 +13,10 @@ export default {
       black: "#000",
       "bg-grey": "#DFDFDF80",
       "light-grey": "#BEBEBE",
+      "light-grey-2": "#EFEFEF",
       blue: "#109AC9",
+      green: "#00C45A",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

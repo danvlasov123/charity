@@ -7,27 +7,36 @@ import { useFormik } from "formik";
 
 import { RegisterSchema } from "src/utils/validation-schemas";
 
-import { fetchRegister } from "src/api/auth/auth";
+import { fetchRegister, fetchLogin } from "src/api/auth/auth";
 
-import { useDispatch } from "react-redux";
-
-import { userActions } from "src/store/slices";
+import { useUser } from "src/hooks";
 
 const Register = () => {
-  const dispatch = useDispatch();
+  const { dispatch, userActions } = useUser();
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", password: "" },
+    initialValues: { name: "", email: "", password: "", agree: true },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setFieldError }) => {
-      const data = await fetchRegister(values);
+      const registerData = await fetchRegister(values);
 
-      if (data.success) {
-        dispatch(userActions.setAccessToken(data.access_token));
-        return dispatch(userActions.setAuthorization(true));
+      if (registerData.success) {
+        const loginData = await fetchLogin({
+          email: values.email,
+          password: values.password,
+        });
+
+        const { success, ...tokens } = loginData;
+
+        if (success) {
+          dispatch(userActions.setAuthorization(true));
+          return dispatch(userActions.setTokens(tokens));
+        }
       }
 
-      setFieldError("message", data.error);
+      console.log({ registerData });
+
+      setFieldError("message", registerData.error);
     },
   });
 
@@ -40,13 +49,6 @@ const Register = () => {
           </span>
         )}
         <RegisterForm formik={formik} />
-        <div className="px-6 pt-2.5">
-          <p className="text-center text-xs">
-            Регистрируясь, вы соглашаетесь с нашими Условиями
-            обслуживания и Политикой конфиденциальности, а также подтверждаете,
-            что вам исполнилось 18 лет.
-          </p>
-        </div>
         <div className="pt-5 text-center text-sm">
           <p>
             У вас уже есть учетная запись? 

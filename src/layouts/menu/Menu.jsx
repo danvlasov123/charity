@@ -4,7 +4,10 @@ import { PAGES_PATH } from "src/router";
 const Menu = () => {
   return (
     <div className="fixed bottom-0 left-1/2 z-50 h-16 w-full -translate-x-1/2 border-t border-black border-x-grey bg-white md:max-w-xl md:border-x">
-      <div className="flex h-full w-full items-center justify-center gap-32">
+      <div className="flex h-full w-full items-center justify-center gap-20">
+        <Link to={PAGES_PATH.history.full}>
+          <img src="/icons/history.svg" alt="history" width={26} height={25} />
+        </Link>
         <Link to={PAGES_PATH.main.full}>
           <img src="/icons/home.svg" alt="home" width={34} height={34} />
         </Link>

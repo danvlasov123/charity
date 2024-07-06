@@ -1,44 +1,55 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "src/hooks";
 
 import { PAGES_PATH } from "src/router";
 
 const Settings = () => {
-  const info = [
-    {
-      title: "Personal info",
-      label: "David Sharov",
-      url: PAGES_PATH.user.full,
-    },
-    {
-      title: "Language",
-      label: "Eng",
-      url: PAGES_PATH.language.full,
-    },
-    {
-      title: "Security",
-      url: PAGES_PATH.password.full,
-    },
-  ];
+  const {
+    state: { user },
+  } = useUser();
 
-  const contact = [
-    {
-      title: "Telegram",
-      url: "/",
-    },
-    {
-      title: "YouTube",
-      url: "/",
-    },
-    {
-      title: "Instagram",
-      url: "/",
-    },
-    {
-      title: "Vk",
-      url: "/",
-    },
-  ];
+  const info = useMemo(
+    () => [
+      {
+        title: "Personal info",
+        label: `${user?.firstName || ""} ${user?.lastName || ""}`,
+        url: PAGES_PATH.user.full,
+      },
+      {
+        title: "Language",
+        label: "Eng",
+        url: PAGES_PATH.language.full,
+      },
+      {
+        title: "Security",
+        url: PAGES_PATH.password.full,
+      },
+    ],
+    [user],
+  );
+
+  const contact = useMemo(
+    () => [
+      {
+        title: "Telegram",
+        url: user?.telegram || "/",
+      },
+      {
+        title: "YouTube",
+        url: user?.youtube || "/",
+      },
+      {
+        title: "Instagram",
+        url: user?.instagram || "/",
+      },
+      {
+        title: "Vk",
+        url: user?.vk || "/",
+      },
+    ],
+    [user],
+  );
 
   return (
     <Fragment>
@@ -82,8 +93,9 @@ const Settings = () => {
         <div className="flex flex-col gap-6 pt-6">
           {contact.map((item, key) => {
             return (
-              <Link
-                to={item.url}
+              <a
+                target="_blank"
+                href={item.url}
                 key={key}
                 className="flex items-center justify-between"
               >
@@ -100,7 +112,7 @@ const Settings = () => {
                     />
                   </button>
                 </div>
-              </Link>
+              </a>
             );
           })}
         </div>

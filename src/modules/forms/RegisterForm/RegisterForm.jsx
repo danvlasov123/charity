@@ -1,7 +1,8 @@
-import { Input } from "src/components/ui";
+import { Input, Checkbox } from "src/components/ui";
 
 const RegisterForm = ({ formik }) => {
-  const { handleChange, values, errors, handleBlur, touched } = formik;
+  const { handleChange, values, errors, handleBlur, touched, handleSubmit } =
+    formik;
 
   return (
     <form>
@@ -37,6 +38,19 @@ const RegisterForm = ({ formik }) => {
           onBlur={handleBlur}
           value={values.password}
           error={touched.password && errors.password}
+        />
+      </div>
+      <div className="pt-6">
+        <Checkbox
+          onChange={handleChange}
+          onBlur={handleBlur}
+          checked={values.agree}
+          error={touched.agree && errors.agree}
+          name="agree"
+          id="agree"
+          label="Регистрируясь, вы соглашаетесь с нашими Условиями
+            обслуживания и Политикой конфиденциальности, а также подтверждаете,
+            что вам исполнилось 18 лет."
         />
       </div>
     </form>

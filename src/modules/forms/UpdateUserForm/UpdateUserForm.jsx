@@ -1,65 +1,53 @@
-import { Link } from "react-router-dom";
 import { Input, Button, constants } from "src/components/ui";
-
-import { useFormik } from "formik";
-
-import { UpdateUserSchema } from "src/utils/validation-schemas";
 
 import cn from "classnames";
 
-const UpdateUserForm = ({ onSubmit, onCancel }) => {
+const UpdateUserForm = ({ formik, onCancel }) => {
   const { handleSubmit, handleBlur, handleChange, values, errors, touched } =
-    useFormik({
-      initialValues: {
-        "user-name": "David",
-        "display-name": "Sharov",
-      },
-      validationSchema: UpdateUserSchema,
-      onSubmit: onSubmit,
-    });
+    formik;
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="relative">
-        <label htmlFor="user-name" className="px-6 text-xs text-grey">
-          User name
+        <label htmlFor="firstName" className="px-6 text-xs text-grey">
+          First name
         </label>
         <Input
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values["user-name"]}
-          name="user-name"
-          id="user-name"
+          value={values["firstName"]}
+          name="firstName"
+          id="firstName"
           variant={constants.variants.outline}
           className={cn({
-            "!border-error": touched["user-name"] && !!errors["user-name"],
+            "!border-error": touched["firstName"] && !!errors["firstName"],
           })}
         />
-        {touched["user-name"] && errors["user-name"] && (
+        {touched["firstName"] && errors["firstName"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["user-name"]}
+            {errors["firstName"]}
           </span>
         )}
       </div>
       <div>
-        <label htmlFor="display-name" className="px-6 text-xs text-grey">
-          Display name
+        <label htmlFor="lastName" className="px-6 text-xs text-grey">
+          Last name
         </label>
         <Input
           onChange={handleChange}
           onBlur={handleBlur}
-          value={values["display-name"]}
-          name="display-name"
-          id="display-name"
+          value={values["lastName"]}
+          name="lastName"
+          id="lastName"
           variant={constants.variants.outline}
           className={cn({
             "!border-error":
-              touched["display-name"] && !!errors["display-name"],
+              touched["lastName"] && !!errors["lastName"],
           })}
         />
-        {touched["display-name"] && errors["display-name"] && (
+        {touched["lastName"] && errors["lastName"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["display-name"]}
+            {errors["lastName"]}
           </span>
         )}
       </div>

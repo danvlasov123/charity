@@ -8,23 +8,27 @@ const Input = ({
   ...props
 }) => {
   const className = cn(
-    "w-full focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+    "w-full focus:ring-0 focus:border-grey active:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
     {
       "rounded-md border border-grey px-4 h-12":
         variant === constants.variants.primary,
       "bg-grey rounded-lg text-black h-10 px-4 placeholder:text-black":
         variant === constants.variants.secondary,
-      "border-b border-light-grey leading-4 px-6 py-2.5":
+      "border-0 border-b border-light-grey leading-4 px-6 py-2.5":
         variant === constants.variants.outline,
-      "border-error": !!error,
+      "!border-error": !!error,
     },
     props.className,
   );
 
   return (
-    <div>
+    <div className="relative">
       <input {...props} className={className} />
-      {!!error && <span className="block w-full pl-5 text-error">{error}</span>}
+      {!!error && (
+        <span className="absolute -bottom-4 block w-full pl-5 text-error text-xs">
+          {error}
+        </span>
+      )}
     </div>
   );
 };

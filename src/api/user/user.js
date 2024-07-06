@@ -1,6 +1,4 @@
-import { store } from "src/store";
 import { axiosInstance } from "../config";
-import { userActions } from "src/store";
 
 export const fetchGetProfile = async () => {
   try {
@@ -9,6 +7,30 @@ export const fetchGetProfile = async () => {
     return { success: true, ...responseData };
   } catch (error) {
     console.log(error);
-    return { success: false, error: error?.message || "Get Profile Error" };
+    return {
+      success: false,
+      error:
+        error?.response?.data?.message || error?.message || "Get Profile Error",
+    };
+  }
+};
+
+export const fetchPostProfile = async (data) => {
+  try {
+    const { data: responseData } = await axiosInstance.post(
+      "/auth/profile",
+      data,
+    );
+
+    return { success: true, ...responseData };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error:
+        error?.response?.data?.message ||
+        error?.message ||
+        "Post Profile Error",
+    };
   }
 };

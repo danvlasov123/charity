@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
     common: {
-      Authorization: store.getState().user.access_token,
+      Authorization: `Bearer  ${store.getState().user.access_token}`,
     },
   },
 });

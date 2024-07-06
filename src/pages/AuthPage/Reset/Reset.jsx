@@ -15,7 +15,7 @@ const Reset = () => {
   const navigate = useNavigate();
   const onBack = () => navigate(-1);
 
-  const [steps, setSteps] = useState(constants.steps.password);
+  const [steps, setSteps] = useState(constants.steps.email);
 
   const onSubmit = (step) => setSteps(step);
 

@@ -9,7 +9,9 @@ import { useSelector } from "react-redux";
 
 const Layout = ({ children, className = "", wrapperClassName = "" }) => {
   return (
-    <div className={cn("mx-auto w-full text-sm md:max-w-xl", wrapperClassName)}>
+    <div
+      className={cn("mx-auto w-full text-base md:max-w-xl", wrapperClassName)}
+    >
       <div
         className={cn(
           "relative h-[100dvh] overflow-y-auto overflow-x-hidden border-grey md:border-x",

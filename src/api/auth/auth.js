@@ -10,7 +10,13 @@ export const fetchRegister = async (data) => {
     return { success: true, ...responseData };
   } catch (error) {
     console.log(error);
-    return { success: false, error: error?.message || "Registration Error" };
+    return {
+      success: false,
+      error:
+        error?.response?.data?.message ||
+        error?.message ||
+        "Registration Error",
+    };
   }
 };
 
@@ -24,6 +30,12 @@ export const fetchLogin = async (data) => {
     return { success: true, ...responseData };
   } catch (error) {
     console.log(error);
-    return { success: false, error: error?.message || "Authorisation Error" };
+    return {
+      success: false,
+      error:
+        error?.response?.data?.message ||
+        error?.message ||
+        "Authorisation Error",
+    };
   }
 };
