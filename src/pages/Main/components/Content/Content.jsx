@@ -22,7 +22,7 @@ const Content = () => {
   return (
     <div className="flex flex-col gap-5 overflow-y-auto py-4">
       {posts.map((item) => {
-        const img = item.mediaFiles.find((img) => img?.thumbnailUrl);
+        const img = item.mediaFiles.find((img) => img?.url);
 
         console.log(img);
 
@@ -40,7 +40,7 @@ const Content = () => {
             <div className="absolute left-0 top-0 -z-10 h-full w-full blur-[1px] brightness-75">
               <img
                 crossOrigin="anonymous"
-                src={img.thumbnailUrl}
+                src={img.url}
                 alt={item.title}
                 height={240}
                 className="h-full w-full object-cover"

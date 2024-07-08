@@ -68,14 +68,14 @@ const Donate = () => {
   if (!post) {
     return <Loader />;
   }
-  const img = post?.mediaFiles.find((media) => media.thumbnailUrl);
+  const img = post?.mediaFiles.find((media) => media.url);
 
   return (
     <div>
       <div className="h-[30%] w-full overflow-hidden">
         <img
           crossOrigin="anonymous"
-          src={img.thumbnailUrl}
+          src={img.url}
           alt={post.title}
           height={400}
           className="h-full w-full object-cover"
