@@ -53,7 +53,10 @@ const Donate = () => {
 
           return setPost({ ...data, prices });
         }
-        return setPost(data);
+
+        const currentPrices = data.prices.split(",");
+
+        return setPost({ ...data, prices: currentPrices });
       }
 
       navigate(PAGES_PATH.main.full);
