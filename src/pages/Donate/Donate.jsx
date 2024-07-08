@@ -12,13 +12,6 @@ import { DonateAmountSchema } from "src/utils/validation-schemas";
 
 import cn from "classnames";
 
-const mockData = {
-  name: "Africa",
-  img: "/mock-image.webp",
-  images: ["/mock-image.webp", "/mock-image.webp", "/mock-image.webp"],
-  id: 4,
-};
-
 const Donate = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -72,13 +65,15 @@ const Donate = () => {
   if (!post) {
     return <Loader />;
   }
+  const img = post?.mediaFiles.find((media) => media.thumbnailUrl);
 
   return (
     <div>
       <div className="h-[30%] w-full overflow-hidden">
         <img
-          src={mockData.img}
-          alt={mockData.title}
+          crossOrigin="anonymous"
+          src={img.thumbnailUrl}
+          alt={post.title}
           height={400}
           className="h-full w-full object-cover"
         />
@@ -90,7 +85,7 @@ const Donate = () => {
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <div className="rounded-3xl bg-bg-grey p-2.5">
-              <p className="text-sm leading-3">2.3M views</p>
+              <p className="text-sm leading-3">{post.visitsCount} views</p>
             </div>
             <div className="rounded-3xl bg-bg-grey p-2.5">
               <p className="text-sm leading-3">{postDate}</p>
@@ -147,7 +142,7 @@ const Donate = () => {
               </span>
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-4">
             <Button type="submit">Пожертвовать сейчас</Button>
             <Button
               variant={constantsUi.variants.secondary}

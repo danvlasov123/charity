@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Auth, Login, Register, Reset } from "./pages/AuthPage";
 import { Main } from "./pages/Main";
 import { History } from "./pages/History";
-import { Donate, Confirm } from "./pages/Donate";
+import { Donate, Confirm, Success, Failed } from "./pages/Donate";
 
 import { PrivateLayout } from "./layouts/layout";
 
@@ -75,6 +75,16 @@ export const PAGES_PATH = {
     base: "settings/language",
     full: "/settings/language",
   },
+  success: {
+    parent: "/",
+    base: "donate/success",
+    full: "/donate/success",
+  },
+  failed: {
+    parent: "/",
+    base: "donate/failed",
+    full: "/donate/failed",
+  },
 };
 
 export const router = createBrowserRouter([
@@ -119,6 +129,14 @@ export const router = createBrowserRouter([
       {
         path: PAGES_PATH.language.base,
         element: <SettingsLanguage />,
+      },
+      {
+        path: PAGES_PATH.success.base,
+        element: <Success />,
+      },
+      {
+        path: PAGES_PATH.failed.base,
+        element: <Failed />,
       },
     ],
   },

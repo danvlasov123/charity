@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { format } from "date-fns";
 import cn from "classnames";
@@ -6,6 +6,8 @@ import { Button } from "src/components/ui";
 import { useNavigate } from "react-router-dom";
 
 import { PAGES_PATH } from "src/router";
+import { fetchGetPayments } from "src/api/payments/payments";
+import { Loader } from "src/modules/Loader/Loader";
 
 const data = [
   {
@@ -57,6 +59,9 @@ const data = [
 
 const History = () => {
   const navigate = useNavigate();
+
+  const [history, setHistory] = useState(null);
+
   const [opened, setOpened] = useState(null);
 
   const handleToggle = (id) => {
@@ -70,6 +75,24 @@ const History = () => {
     navigate(PAGES_PATH.confirm.full(id, amount));
   };
 
+  useEffect(() => {
+    const initial = async () => {
+      const data = await fetchGetPayments();
+
+      if (data.success) {
+        return setHistory(data.result);
+      }
+
+      setHistory([]);
+    };
+
+    initial();
+  }, []);
+
+  if (!history) {
+    return <Loader />;
+  }
+
   return (
     <div>
       <div className="border-light-grey-2 flex justify-end border-b px-6 py-4">
@@ -78,7 +101,7 @@ const History = () => {
       <div className="px-6 pt-5">
         <h1 className="text-xl font-medium leading-6">History</h1>
         <div className="flex flex-col gap-4 pt-4">
-          {data.map((item) => {
+          {history.map((item) => {
             const isOpened = item.id === opened;
             const className = cn(
               "max-h-[54px] overflow-hidden transition-all duration-500 rounded-md",
@@ -137,6 +160,9 @@ const History = () => {
               </div>
             );
           })}
+          {!history.length && (
+            <p className="text-sm text-grey">History is empty</p>
+          )}
         </div>
       </div>
     </div>

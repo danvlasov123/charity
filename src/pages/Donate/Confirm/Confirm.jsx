@@ -7,6 +7,7 @@ import { fetchGetPostById } from "src/api/post/post";
 import { Loader } from "src/modules/Loader/Loader";
 
 import { PAGES_PATH } from "src/router";
+import { fetchPostPayment } from "src/api/payments/payments";
 
 const Confirm = () => {
   const navigate = useNavigate();
@@ -14,6 +15,19 @@ const Confirm = () => {
   const { id, amount } = useParams();
 
   const [post, setPost] = useState(null);
+
+  const handleSubmit = async () => {
+    const data = {
+      amount: Number(amount),
+      charityPostId: id,
+      currency: "usd",
+    };
+    const response = await fetchPostPayment(data);
+
+    if (response.success) {
+      return window.open(response.invoiceUrl, "_self").focus();
+    }
+  };
 
   useEffect(() => {
     const initial = async () => {
@@ -46,10 +60,7 @@ const Confirm = () => {
         </button>
         <div className="pt-5">
           <div className="rounded-2xl bg-bg-grey p-2.5">
-            <p className="text-[25px] font-medium leading-7">
-              Rihanna, David Guetta, Bebe Rexha, Alan Walker, Lady Gaga Cover
-              Style{" "}
-            </p>
+            <p className="text-[25px] font-medium leading-7">{post.title}</p>
           </div>
         </div>
         <div className="pt-5">
@@ -63,7 +74,7 @@ const Confirm = () => {
           <p>Всего</p>
           <span>{amount}$</span>
         </div>
-        <Button>Подтвердить</Button>
+        <Button onClick={handleSubmit}>Подтвердить</Button>
       </div>
     </div>
   );
