@@ -14,8 +14,6 @@ const History = () => {
 
   const [history, setHistory] = useState(null);
 
-  console.log({ history });
-
   const [opened, setOpened] = useState(null);
 
   const handleToggle = (id) => {

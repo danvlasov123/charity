@@ -18,7 +18,7 @@ const Button = ({
       "px-4 active:bg-light-grey": variant === constants.variants.outline,
     },
     {
-      "bg-grey pointer-events-none": loading || disabled,
+      "!bg-grey pointer-events-none": loading || disabled,
     },
     className,
   );

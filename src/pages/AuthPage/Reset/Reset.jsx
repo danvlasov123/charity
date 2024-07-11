@@ -1,25 +1,22 @@
 import { useState } from "react";
-import { ResetEmail, ResetCode, ResetPassword } from "./Steps";
-import { useNavigate } from "react-router-dom";
+import { ResetEmail, ResetPassword } from "./Steps";
+import { useNavigate, useParams } from "react-router-dom";
 import { PAGES_PATH } from "src/router";
 
 export const constants = {
   steps: {
     email: "email",
-    code: "code",
     password: "password",
   },
 };
 
 const Reset = () => {
+  const { token, step = constants.steps.email } = useParams();
+
   const navigate = useNavigate();
   const onBack = () => navigate(-1);
 
-  const [steps, setSteps] = useState(constants.steps.email);
-
-  const onSubmit = (step) => setSteps(step);
-
-  const onFinish = () => navigate(PAGES_PATH.login.full);
+  const [steps, setSteps] = useState(step);
 
   return (
     <div className="h-full">
@@ -27,11 +24,8 @@ const Reset = () => {
         <img src="/icons/back.svg" alt="back" height={14} />
       </button>
       <div className="h-full pb-24 pt-20">
-        {constants.steps.email === steps && <ResetEmail onSubmit={onSubmit} />}
-        {constants.steps.code === steps && <ResetCode onSubmit={onSubmit} />}
-        {constants.steps.password === steps && (
-          <ResetPassword onSubmit={onFinish} />
-        )}
+        {constants.steps.email === steps && <ResetEmail />}
+        {constants.steps.password === steps && <ResetPassword token={token} />}
       </div>
     </div>
   );

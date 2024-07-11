@@ -20,11 +20,11 @@ export const LoginSchema = Yup.object().shape({
 
 export const UpdatePasswordSchema = Yup.object().shape({
   "current-password": Yup.string().required(
-    "Текуший пароль обятелен для заполнения",
+    "Текуший пароль обязателен для заполнения",
   ),
   "new-password": Yup.string()
     .min(8, "Минимум 8 символов")
-    .required("Новый пароль обятелен для заполнения"),
+    .required("Новый пароль обязателен для заполнения"),
   "confirm-password": Yup.string()
     .oneOf([Yup.ref("new-password"), null], "Новый пароль не совпадает")
     .required("Подтвердите новый пароль"),
@@ -40,3 +40,19 @@ export const DonateAmountSchema = Yup.object().shape({
     .min(5, "Наш минимальный взнос составляет 5.00$")
     .required("Наш минимальный взнос составляет 5.00$"),
 });
+
+export const ResetPasswordSchema = {
+  email: Yup.object().shape({
+    email: Yup.string()
+      .email("Недопустимый адрес электронной почты")
+      .required("Поле Электронная почта обязательно для заполнения"),
+  }),
+  password: Yup.object().shape({
+    new_password: Yup.string()
+      .min(8, "Минимум 8 символов")
+      .required("Новый пароль обязателен для заполнения"),
+    password: Yup.string()
+      .oneOf([Yup.ref("new_password"), null], "Новый пароль не совпадает")
+      .required("Подтвердите новый пароль"),
+  }),
+};

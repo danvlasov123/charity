@@ -2,11 +2,22 @@ import { useNavigate } from "react-router-dom";
 import { UpdatePasswordForm } from "src/modules/forms";
 import { PAGES_PATH } from "src/router";
 
+import { fetchPostChangePassword } from "src/api/auth/auth";
+
 const SettingsPassword = () => {
   const navigate = useNavigate();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const data = {
+      password: values["new-password"],
+      confirmPassword: values["new-password"],
+    };
+
+    const response = await fetchPostChangePassword(data);
+
+    if (response.success) {
+      navigate(PAGES_PATH.success.full);
+    }
   };
 
   const onCancel = () => {

@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 
 import { userActions } from "src/store/slices";
 
+import { constants } from "../Reset/Reset";
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -44,7 +46,9 @@ const Login = () => {
         <LoginForm formik={formik} />
 
         <div className="flex justify-center gap-10 pt-8 text-sm">
-          <Link to={PAGES_PATH.reset.full}>Забыли пароль?</Link>
+          <Link to={PAGES_PATH.reset.full(constants.steps.email)}>
+            Забыли пароль?
+          </Link>
           <Link to={PAGES_PATH.register.full}>Регистрация</Link>
         </div>
       </div>

@@ -42,8 +42,8 @@ export const PAGES_PATH = {
   },
   reset: {
     parent: "/reset",
-    base: "reset",
-    full: "/auth/reset",
+    base: "reset/:step/:token?",
+    full: (step) => `/auth/reset/${step}`,
   },
   donate: {
     parent: "/",
