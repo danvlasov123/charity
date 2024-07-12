@@ -6,8 +6,10 @@ import { useFormik } from "formik";
 import { UpdatePasswordSchema } from "src/utils/validation-schemas";
 
 import cn from "classnames";
+import { useTranslation } from "react-i18next";
 
 const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
+  const { t } = useTranslation();
   const { handleSubmit, handleBlur, handleChange, values, errors, touched } =
     useFormik({
       initialValues: {
@@ -23,7 +25,7 @@ const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="relative">
         <label htmlFor="current-password" className="px-6 text-xs text-grey">
-          Current Password
+          {t("Current Password")}
         </label>
         <Input
           onChange={handleChange}
@@ -40,19 +42,19 @@ const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
         />
         {touched["current-password"] && errors["current-password"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["current-password"]}
+            {t(errors["current-password"])}
           </span>
         )}
       </div>
       <div>
-        <Link to={"/"} className="text-blue px-6 text-xs">
-          Forgot password?
+        <Link to={"/"} className="px-6 text-xs text-blue">
+          {t("Forgot password?")}
         </Link>
         <label
           htmlFor="new-password"
           className="block px-6 pt-2 text-xs text-grey"
         >
-          New Password
+          {t("New Password")}
         </label>
         <Input
           onChange={handleChange}
@@ -69,13 +71,13 @@ const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
         />
         {touched["new-password"] && errors["new-password"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["new-password"]}
+            {t(errors["new-password"])}
           </span>
         )}
       </div>
       <div>
         <label htmlFor="confirm-password" className="px-6 text-xs text-grey">
-          Confirm Password
+          {t("Confirm Password")}
         </label>
         <Input
           onChange={handleChange}
@@ -92,7 +94,7 @@ const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
         />
         {touched["confirm-password"] && errors["confirm-password"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["confirm-password"]}
+            {t(errors["confirm-password"])}
           </span>
         )}
       </div>
@@ -102,14 +104,14 @@ const UpdatePasswordForm = ({ onSubmit, onCancel }) => {
           type="submit"
           className="uppercase"
         >
-          Save shanges
+          {t("Save")}
         </Button>
         <Button
           variant={constants.variants.outline}
           onClick={onCancel}
           className="uppercase"
         >
-          Cancel
+          {t("Cancel")}
         </Button>
       </div>
     </form>

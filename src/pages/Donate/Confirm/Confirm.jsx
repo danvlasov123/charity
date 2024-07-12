@@ -8,8 +8,10 @@ import { Loader } from "src/modules/Loader/Loader";
 
 import { PAGES_PATH } from "src/router";
 import { fetchPostPayment } from "src/api/payments/payments";
+import { useTranslation } from "react-i18next";
 
 const Confirm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { id, amount } = useParams();
@@ -71,10 +73,10 @@ const Confirm = () => {
       </div>
       <div className="border-t border-grey px-6">
         <div className="flex items-center justify-between py-6 text-xl font-medium leading-6">
-          <p>Всего</p>
+          <p>{t("Total")}</p>
           <span>{amount}$</span>
         </div>
-        <Button onClick={handleSubmit}>Подтвердить</Button>
+        <Button onClick={handleSubmit}>{t("Confirm")}</Button>
       </div>
     </div>
   );

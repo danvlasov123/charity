@@ -1,4 +1,5 @@
 import { Fragment, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useUser } from "src/hooks";
 
@@ -6,27 +7,31 @@ import { PAGES_PATH } from "src/router";
 
 const Settings = () => {
   const {
+    t,
+    i18n: { language },
+  } = useTranslation();
+  const {
     state: { user },
   } = useUser();
 
   const info = useMemo(
     () => [
       {
-        title: "Personal info",
+        title: t("Personal info"),
         label: `${user?.firstName || ""} ${user?.lastName || ""}`,
         url: PAGES_PATH.user.full,
       },
       {
-        title: "Language",
-        label: "Eng",
+        title: t("Language"),
+        label: language,
         url: PAGES_PATH.language.full,
       },
       {
-        title: "Security",
+        title: t("Security"),
         url: PAGES_PATH.password.full,
       },
     ],
-    [user],
+    [user, language],
   );
 
   const contact = useMemo(
@@ -55,7 +60,7 @@ const Settings = () => {
     <Fragment>
       <div className="border-t border-grey px-6 py-5">
         <div>
-          <h2 className="text-xl font-medium leading-6">Account</h2>
+          <h2 className="text-xl font-medium leading-6">{t("Account")}</h2>
         </div>
         <div className="flex flex-col gap-6 pt-6">
           {info.map((item, key) => {
@@ -88,7 +93,7 @@ const Settings = () => {
       </div>
       <div className="border-y border-grey px-6 py-5">
         <div>
-          <h2 className="text-xl font-medium leading-6">Contact</h2>
+          <h2 className="text-xl font-medium leading-6">{t("Contacts")}</h2>
         </div>
         <div className="flex flex-col gap-6 pt-6">
           {contact.map((item, key) => {

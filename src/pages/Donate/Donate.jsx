@@ -7,14 +7,18 @@ import { PAGES_PATH } from "src/router";
 
 import { format } from "date-fns";
 
+import { ru, enUS } from "date-fns/locale";
+
 import { useFormik } from "formik";
 import { DonateAmountSchema } from "src/utils/validation-schemas";
 
 import cn from "classnames";
+import { useTranslation } from "react-i18next";
 
 const Donate = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const [post, setPost] = useState(null);
 
@@ -22,8 +26,10 @@ const Donate = () => {
     if (!post?.updatedAt) {
       return null;
     }
-    return format(post.updatedAt, "dd MMM yyyy");
-  }, [post?.updatedAt]);
+    return format(post.updatedAt, "dd MMM yyyy", {
+      locale: i18n.language === "Eng" ? enUS : ru,
+    });
+  }, [post?.updatedAt, i18n.language]);
 
   const {
     values,
@@ -88,7 +94,9 @@ const Donate = () => {
           </div>
           <div className="flex flex-wrap items-center gap-4">
             <div className="rounded-3xl bg-bg-grey p-2.5">
-              <p className="text-sm leading-3">{post.visitsCount} views</p>
+              <p className="text-sm leading-3">
+                {post.visitsCount} {t("views")}
+              </p>
             </div>
             <div className="rounded-3xl bg-bg-grey p-2.5">
               <p className="text-sm leading-3">{postDate}</p>
@@ -122,13 +130,14 @@ const Donate = () => {
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="rounded-2xl bg-bg-grey p-2.5">
             <p className="text-base leading-[18px]">
-              Пожалуйста, введите желаемый размер твоего пожертвования. Наш
-              минимальный взнос составляет 5.00$
+              {t(
+                "Please enter your desired donation amount. Our invention initially costs $5.00.",
+              )}
             </p>
           </div>
           <div className="relative flex flex-col gap-2.5">
             <label htmlFor="sum" className="text-xs text-grey">
-              Сумма взноса
+              {t("Payment amount")}
             </label>
             <Input
               variant={constantsUi.variants.secondary}
@@ -146,12 +155,12 @@ const Donate = () => {
             )}
           </div>
           <div className="flex flex-col gap-4">
-            <Button type="submit">Пожертвовать сейчас</Button>
+            <Button type="submit">{t("Donate now")}</Button>
             <Button
               variant={constantsUi.variants.secondary}
               onClick={() => navigate(-1)}
             >
-              Вернуться назад
+              {t("Come back")}
             </Button>
           </div>
         </form>

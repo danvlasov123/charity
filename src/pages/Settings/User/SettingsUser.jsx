@@ -12,8 +12,10 @@ import { UpdateUserSchema } from "src/utils/validation-schemas";
 import { useUser } from "src/hooks";
 
 import { fetchPostProfile } from "src/api/user/user";
+import { useTranslation } from "react-i18next";
 
 const SettingsUser = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     state: { user },
@@ -58,14 +60,14 @@ const SettingsUser = () => {
           className="bg-bg-grey"
           onClick={() => dispatch(userActions.onLogout())}
         >
-          Go out
+          {t("Go out")}
         </Button>
         <Button
           variant={constants.variants.outline}
           className="bg-bg-grey"
           onClick={() => dispatch(userActions.onLogout())}
         >
-          Change account
+          {t("Change account")}
         </Button>
       </div>
     </div>

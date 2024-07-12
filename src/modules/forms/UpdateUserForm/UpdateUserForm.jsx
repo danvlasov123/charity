@@ -1,8 +1,10 @@
 import { Input, Button, constants } from "src/components/ui";
 
 import cn from "classnames";
+import { useTranslation } from "react-i18next";
 
 const UpdateUserForm = ({ formik, onCancel }) => {
+  const { t } = useTranslation();
   const { handleSubmit, handleBlur, handleChange, values, errors, touched } =
     formik;
 
@@ -10,7 +12,7 @@ const UpdateUserForm = ({ formik, onCancel }) => {
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="relative">
         <label htmlFor="firstName" className="px-6 text-xs text-grey">
-          First name
+          {t("First name")}
         </label>
         <Input
           onChange={handleChange}
@@ -25,13 +27,13 @@ const UpdateUserForm = ({ formik, onCancel }) => {
         />
         {touched["firstName"] && errors["firstName"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["firstName"]}
+            {t(errors["firstName"])}
           </span>
         )}
       </div>
       <div>
         <label htmlFor="lastName" className="px-6 text-xs text-grey">
-          Last name
+          {t("Last name")}
         </label>
         <Input
           onChange={handleChange}
@@ -41,13 +43,12 @@ const UpdateUserForm = ({ formik, onCancel }) => {
           id="lastName"
           variant={constants.variants.outline}
           className={cn({
-            "!border-error":
-              touched["lastName"] && !!errors["lastName"],
+            "!border-error": touched["lastName"] && !!errors["lastName"],
           })}
         />
         {touched["lastName"] && errors["lastName"] && (
           <span className="absolute px-6 pt-1 text-xs text-error">
-            {errors["lastName"]}
+            {t(errors["lastName"])}
           </span>
         )}
       </div>
@@ -57,14 +58,14 @@ const UpdateUserForm = ({ formik, onCancel }) => {
           className="uppercase"
           type="submit"
         >
-          Save shanges
+          {t("Save")}
         </Button>
         <Button
           variant={constants.variants.outline}
           className="uppercase"
           onClick={onCancel}
         >
-          Cancel
+          {t("Cancel")}
         </Button>
       </div>
     </form>

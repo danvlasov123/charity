@@ -14,8 +14,10 @@ import { useDispatch } from "react-redux";
 import { userActions } from "src/store/slices";
 
 import { constants } from "../Reset/Reset";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -40,16 +42,16 @@ const Login = () => {
       <div className="relative">
         {formik.errors.message && (
           <span className="absolute -top-6 left-0 pb-2 text-red">
-            {formik.errors.message}
+            {t(formik.errors.message)}
           </span>
         )}
         <LoginForm formik={formik} />
 
         <div className="flex justify-center gap-10 pt-8 text-sm">
           <Link to={PAGES_PATH.reset.full(constants.steps.email)}>
-            Забыли пароль?
+            {t("forgot_password")}
           </Link>
-          <Link to={PAGES_PATH.register.full}>Регистрация</Link>
+          <Link to={PAGES_PATH.register.full}>{t("registration")}</Link>
         </div>
       </div>
       <div>
@@ -58,7 +60,7 @@ const Login = () => {
           loading={formik.isSubmitting}
           className="uppercase"
         >
-          Авторизуйтесь
+          {t("log_in")}
         </Button>
       </div>
     </div>

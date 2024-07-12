@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { PAGES_PATH } from "src/router";
 import { fetchGetPayments } from "src/api/payments/payments";
 import { Loader } from "src/modules/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const History = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [history, setHistory] = useState(null);
 
@@ -51,7 +53,7 @@ const History = () => {
         <img src="/logo.svg" alt="logo" height={54} />
       </div>
       <div className="px-6 pb-10 pt-5">
-        <h1 className="text-xl font-medium leading-6">History</h1>
+        <h1 className="text-xl font-medium leading-6">{t("History")}</h1>
         <div className="flex flex-col gap-4 pt-4">
           {history.map((item) => {
             const isOpened = item.id === opened;
@@ -97,11 +99,9 @@ const History = () => {
                     <span>{format(item.date, "dd.MM.yyyy")}</span>
                   </div>
                   <div
-                    className={`flex items-center justify-between pt-2.5 font-medium text-green ${item.status === "Approved" ? "text-green" : "text-red"}`}
+                    className={`flex items-center justify-between pt-2.5 font-medium text-green ${item.status === "Declined" ? "text-red" : "text-green"}`}
                   >
-                    <p>
-                      {item.status === "Approved" ? "Approved" : "Declined"}
-                    </p>
+                    <p>{item.status}</p>
                     <span>{item.amount}$</span>
                   </div>
                 </div>
@@ -115,7 +115,7 @@ const History = () => {
             );
           })}
           {!history.length && (
-            <p className="text-sm text-grey">History is empty</p>
+            <p className="text-sm text-grey">{t("History is empty")}</p>
           )}
         </div>
       </div>

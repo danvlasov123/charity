@@ -10,8 +10,10 @@ import { RegisterSchema } from "src/utils/validation-schemas";
 import { fetchRegister, fetchLogin } from "src/api/auth/auth";
 
 import { useUser } from "src/hooks";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
   const { dispatch, userActions } = useUser();
 
   const formik = useFormik({
@@ -34,8 +36,6 @@ const Register = () => {
         }
       }
 
-      console.log({ registerData });
-
       setFieldError("message", registerData.error);
     },
   });
@@ -45,19 +45,19 @@ const Register = () => {
       <div className="relative">
         {formik.errors.message && (
           <span className="absolute -top-6 left-0 pb-2 text-red">
-            {formik.errors.message}
+            {t(formik.errors.message)}
           </span>
         )}
         <RegisterForm formik={formik} />
         <div className="pt-5 text-center text-sm">
           <p>
-            У вас уже есть учетная запись? 
+            {t("already_acc")}
             <Link
               to={PAGES_PATH.login.full}
               className="underline underline-offset-2 hover:opacity-85"
             >
               {" "}
-              Авторизуйтесь
+              {t("log_in")}
             </Link>
           </p>
         </div>
@@ -68,7 +68,7 @@ const Register = () => {
           loading={formik.isSubmitting}
           className="uppercase"
         >
-          ЗАРЕГИСТРИРОВАТЬСЯ
+          {t("register")}
         </Button>
       </div>
     </div>

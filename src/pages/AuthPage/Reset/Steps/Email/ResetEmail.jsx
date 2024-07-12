@@ -4,8 +4,10 @@ import { useFormik } from "formik";
 import { ResetPasswordSchema } from "src/utils/validation-schemas";
 
 import { fetchPostResetPassword } from "src/api/auth/auth";
+import { useTranslation } from "react-i18next";
 
 const ResetEmail = ({ initialValues = { email: "", message: "" } }) => {
+  const { t } = useTranslation();
   const {
     handleBlur,
     handleChange,
@@ -40,23 +42,20 @@ const ResetEmail = ({ initialValues = { email: "", message: "" } }) => {
       onSubmit={handleSubmit}
     >
       <div>
-        <h1 className="uppercase">Восстановить доступ</h1>
-        <p className="pt-8 text-xs">
-          Если у вас есть учетная запись, вы получите ссылку для сброса пароля
-          на это письмо.
-        </p>
+        <h1 className="uppercase">{t("restore_access")}</h1>
+        <p className="pt-8 text-xs">{t("restore_message")}</p>
         <div className="pt-5">
           <Input
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={touched.email && errors.email}
+            error={touched.email && t(errors.email)}
             name="email"
-            placeholder="Электронная почта"
+            placeholder={t("email")}
           />
         </div>
         {errors.message && (
-          <p className="py-4 text-sm text-red">{errors.message}</p>
+          <p className="py-4 text-sm text-red">{t(errors.message)}</p>
         )}
       </div>
       <div>
@@ -67,9 +66,14 @@ const ResetEmail = ({ initialValues = { email: "", message: "" } }) => {
           disabled={isSubmitting || values.message}
         >
           {values.message ? (
-            <img src="/icons/check.svg" className="mx-auto" width={20} alt="success" />
+            <img
+              src="/icons/check.svg"
+              className="mx-auto"
+              width={20}
+              alt="success"
+            />
           ) : (
-            "Отправить код"
+            t("send_code")
           )}
         </Button>
       </div>
